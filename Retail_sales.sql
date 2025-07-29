@@ -124,22 +124,3 @@ select category, count( distinct customer_id) as unique_customers
 from retail_sales
 group by category;
 
---9.Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):
-select * from retail_sales ;
-
-with hourly_sale
-as
-(
-select *,
-	case
-	   when extract (hour from sale_time ) < 12 then 'Morning'
-	   when extract (hour from sale_time ) between 12 and 17 then 'Afternoon'
-	   else 'Evening'
-	end as shift 
-from retail_sales
-) select 
-shift,
-count(*) as total_orders
-from hourly_sale
-group by shift ; 
- 
